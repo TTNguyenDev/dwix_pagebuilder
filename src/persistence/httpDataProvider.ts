@@ -25,6 +25,7 @@ export class HttpDataProvider {
       await BlockChainConnector.instance.initNear();
       const params = new URLSearchParams(window.location.search);
       const id = params.get("id");
+      localStorage.setItem("project_id", id);
       // @ts-ignore
       window.process = { env: {} };
       if (id) {

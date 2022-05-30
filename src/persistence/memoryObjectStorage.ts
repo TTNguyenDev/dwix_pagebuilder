@@ -209,8 +209,7 @@ export class MemoryObjectStorage implements IObjectStorage {
     const state = JSON.stringify(storageDataObject);
     console.log(state);
     const { path } = await IPFSUtils.client.add(state);
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get("id");
+    const id = localStorage.get("project_id");
     await BlockChainConnector.instance.contract.update_data({
       project_id: id,
       data: path,
@@ -277,4 +276,3 @@ class StaticPage<T> implements Page<T> {
     return nextPage;
   }
 }
-
