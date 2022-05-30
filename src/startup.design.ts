@@ -22,6 +22,8 @@ import { DemoDesignModule } from "./modules/demo.design.module";
 
 /* Initializing dependency injection  */
 (async () => {
+  if (location.pathname === "pagebuilder")
+    window.history.replaceState({}, "", `/?${location.search}`);
   const injector = new InversifyInjector();
   injector.bindModule(new CoreDesignModule());
   injector.bindModule(new FormsDesignModule());
