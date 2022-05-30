@@ -7,6 +7,8 @@
  */
 
 import { HttpClient } from "@paperbits/common/http";
+import { BlockChainConnector } from "../utils/blockchain";
+import { IPFSUtils } from "../utils/ipfsUtils";
 
 export class HttpDataProvider {
   private initPromise: Promise<void>;
@@ -20,12 +22,31 @@ export class HttpDataProvider {
     }
 
     this.initPromise = new Promise<void>(async (resolve) => {
-      const response = await this.httpClient.send({
-        url: "/data/demo.json",
-        method: "GET",
-      });
+      await BlockChainConnector.instance.initNear();
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get("id");
+      // @ts-ignore
+      window.process = { env: {} };
+      if (id) {
+        const project = await BlockChainConnector.instance.contract.get_project(
+          {
+            project_id: id,
+          }
+        );
 
-      this.dataObject = response.toObject();
+        console.log(project);
+
+        if (project?.data) {
+          const response = await IPFSUtils.getDataByCID(project.data);
+          this.dataObject = JSON.parse(response);
+        } else {
+          const response = await this.httpClient.send({
+            url: "/data/demo.json",
+            method: "GET",
+          });
+          this.dataObject = response.toObject();
+        }
+      }
 
       resolve();
     });
