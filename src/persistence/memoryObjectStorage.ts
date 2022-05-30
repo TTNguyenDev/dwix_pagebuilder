@@ -209,7 +209,7 @@ export class MemoryObjectStorage implements IObjectStorage {
     const state = JSON.stringify(storageDataObject);
     console.log(state);
     const { path } = await IPFSUtils.client.add(state);
-    const id = window.localStorage.get("project_id");
+    const id = window.localStorage.getItem("project_id");
     await BlockChainConnector.instance.contract.update_data({
       project_id: id,
       data: path,
