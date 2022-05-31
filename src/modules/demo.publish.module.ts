@@ -20,24 +20,36 @@ import { SearchPublishModule } from "@paperbits/core/search/search.publish.modul
 import { ClickCounterDesignModule } from "../components/click-counter/clickCounter.design.module";
 import { FileSystemDataProvider } from "../persistence/fileSystemDataProvider";
 
-
 export class DemoPublishModule implements IInjectorModule {
-    constructor(
-        private readonly dataPath: string,
-        private readonly settingsPath: string,
-        private readonly outputBasePath: string
-    ) { }
+  constructor(
+    private readonly dataPath: string,
+    private readonly settingsPath: string,
+    private readonly outputBasePath: string
+  ) {}
 
-    public register(injector: IInjector): void {
-        injector.bindSingleton("userService", StaticUserService);
-        injector.bindSingleton("roleService", StaticRoleService);
-        injector.bindSingleton("router", StaticRouter);
-        injector.bindSingleton("blobStorage", MemoryBlobStorage);
-        injector.bindInstance("dataProvider", new FileSystemDataProvider(path.resolve(this.dataPath)));
-        injector.bindInstance("objectStorage", new FileSystemObjectStorage(path.resolve(this.dataPath)));
-        injector.bindInstance("outputBlobStorage", new FileSystemBlobStorage(path.resolve(this.outputBasePath)));
-        injector.bindInstance("settingsProvider", new StaticSettingsProvider(path.resolve(this.settingsPath)));
-        injector.bindModule(new SearchPublishModule());
-        injector.bindModule(new ClickCounterDesignModule());
-    }
+  public register(injector: IInjector): void {
+    injector.bindSingleton("userService", StaticUserService);
+    injector.bindSingleton("roleService", StaticRoleService);
+    injector.bindSingleton("router", StaticRouter);
+    injector.bindSingleton("blobStorage", MemoryBlobStorage);
+    injector.bindInstance(
+      "dataProvider",
+      new FileSystemDataProvider(path.resolve(this.dataPath))
+    );
+    injector.bindInstance(
+      "objectStorage",
+      new FileSystemObjectStorage(path.resolve(this.dataPath))
+    );
+    injector.bindInstance(
+      "outputBlobStorage",
+      new FileSystemBlobStorage(path.resolve(this.outputBasePath))
+    );
+    injector.bindInstance(
+      "settingsProvider",
+      new StaticSettingsProvider(path.resolve(this.settingsPath))
+    );
+    injector.bindModule(new SearchPublishModule());
+    injector.bindModule(new ClickCounterDesignModule());
+  }
 }
+

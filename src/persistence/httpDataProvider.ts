@@ -28,14 +28,17 @@ export class HttpDataProvider {
       window.localStorage.setItem("project_id", id);
       // @ts-ignore
       window.process = { env: {} };
-      if (id) {
-        const project = await BlockChainConnector.instance.contract.get_project(
-          {
-            project_id: id,
-          }
-        );
 
-        console.log(project);
+      let project: any;
+      if (id) {
+        try {
+          project = await BlockChainConnector.instance.contract.get_project({
+            project_id: id,
+          });
+          console.log(project);
+        } catch (err) {
+          console.log(err);
+        }
 
         if (project?.data) {
           const response = await IPFSUtils.getDataByCID(project.data);
@@ -47,6 +50,12 @@ export class HttpDataProvider {
           });
           this.dataObject = response.toObject();
         }
+      } else {
+        const response = await this.httpClient.send({
+          url: "/data/demo.json",
+          method: "GET",
+        });
+        this.dataObject = response.toObject();
       }
 
       resolve();
