@@ -13,25 +13,30 @@ import { EventManager } from "@paperbits/common/events";
 import { ViewManager } from "@paperbits/common/ui/viewManager";
 
 @Component({
-    selector: "app",
-    template: template
+  selector: "app",
+  template: template,
 })
 export class App {
-    constructor(
-        private readonly logger: Logger,
-        private readonly viewManager: ViewManager,
-        private readonly eventManager: EventManager
-    ) { }
+  constructor(
+    private readonly logger: Logger,
+    private readonly viewManager: ViewManager,
+    private readonly eventManager: EventManager
+  ) {}
 
-    @OnMounted()
-    public async initialize(): Promise<void> {
-        this.viewManager.setHost({ name: "page-host" });
-        this.viewManager.showToolboxes();
-        this.logger.trackEvent("Startup", { message: `App started.` });
+  @OnMounted()
+  public async initialize(): Promise<void> {
+    this.viewManager.setHost({ name: "page-host" });
+    this.viewManager.showToolboxes();
+    this.logger.trackEvent("Startup", { message: `App started.` });
 
-        setTimeout(() => this.eventManager.dispatchEvent("displayHint", {
-            key: "a69b",
-            content: `When you're in the administrative view, you still can navigate any website hyperlink by clicking on it holding Ctrl (Windows) or ⌘ (Mac) key.`
-        }), 5000);
-    }
+    setTimeout(
+      () =>
+        this.eventManager.dispatchEvent("displayHint", {
+          key: "a69b",
+          content: `When you're in the administrative view, you still can navigate any website hyperlink by clicking on it holding Ctrl (Windows) or ⌘ (Mac) key.`,
+        }),
+      5000
+    );
+  }
 }
+
