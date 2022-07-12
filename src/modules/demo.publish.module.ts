@@ -25,7 +25,7 @@ export class DemoPublishModule implements IInjectorModule {
     private readonly dataPath: string,
     private readonly settingsPath: string,
     private readonly outputBasePath: string
-  ) {}
+  ) { }
 
   public register(injector: IInjector): void {
     injector.bindSingleton("userService", StaticUserService);

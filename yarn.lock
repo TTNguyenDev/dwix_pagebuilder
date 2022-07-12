@@ -467,10 +467,8 @@
     reflect-metadata "^0.1.13"
     xhr2 "^0.2.0"
 
-"@paperbits/core@0.1.499":
+"@paperbits/core@./core", "@paperbits/core@0.1.499":
   version "0.1.499"
-  resolved "https://registry.yarnpkg.com/@paperbits/core/-/core-0.1.499.tgz#f492b1753bcdba3a841e7742efc78eecab4309fe"
-  integrity sha512-KeuXB+ak/yoDEBMKgjvv0dP7LZxv/sgKBhx7o7DDCt0n5SN6/IvyDLj6r1ze8xdXkwWN871pot8QpBQa180vHg==
   dependencies:
     "@googlemaps/js-api-loader" "^1.12.9"
     "@paperbits/common" "0.1.499"

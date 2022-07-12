@@ -47,7 +47,7 @@
   },
   "dependencies": {
     "@paperbits/common": "0.1.499",
-    "@paperbits/core": "0.1.499",
+    "@paperbits/core": "./core",
     "@paperbits/emails": "0.1.499",
     "@paperbits/firebase": "0.1.499",
     "@paperbits/forms": "0.1.499",

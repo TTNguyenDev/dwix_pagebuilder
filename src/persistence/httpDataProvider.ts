@@ -14,7 +14,7 @@ export class HttpDataProvider {
   private initPromise: Promise<void>;
   private dataObject: Object;
 
-  constructor(private readonly httpClient: HttpClient) {}
+  constructor(private readonly httpClient: HttpClient) { }
 
   private async initialize(): Promise<void> {
     if (this.initPromise) {

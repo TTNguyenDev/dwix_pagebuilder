@@ -1,0 +1,54 @@
+{
+    "name": "@paperbits/core",
+    "version": "0.1.499",
+    "description": "Paperbits core components.",
+    "author": "Paperbits",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/paperbits/paperbits-core.git"
+    },
+    "keywords": [
+        "paperbits",
+        "core"
+    ],
+    "bugs": {
+        "url": "https://github.com/paperbits/paperbits-core/issues"
+    },
+    "browserslist": [
+        "defaults",
+        "not ie < 11"
+    ],
+    "dependencies": {
+        "@googlemaps/js-api-loader": "^1.12.9",
+        "@paperbits/common": "0.1.499",
+        "@paperbits/styles": "0.1.499",
+        "await-parallel-limit": "^2.1.0",
+        "basiclightbox": "^5.0.4",
+        "cropperjs": "^1.5.11",
+        "file-saver": "^2.0.5",
+        "html-minifier-terser": "^5.1.1",
+        "html2plaintext": "^2.1.2",
+        "knockout": "^3.5.1",
+        "knockout.validation": "^2.0.4",
+        "lodash": "^4.17.21",
+        "lunr": "^2.3.9",
+        "mime": "3.0.0",
+        "perfect-scrollbar": "1.5.0",
+        "remark": "^14.0.2",
+        "remark-gfm": "^3.0.1",
+        "remark-parse": "^10.0.1",
+        "remark-rehype": "^10.1.0",
+        "rehype-raw": "^6.1.1",
+        "rehype-stringify": "^9.0.3",
+        "xhr2": "^0.2.1"
+    },
+    "devDependencies": {
+        "@types/google.maps": "^3.44.2",
+        "@types/knockout.mapping": "^2.0.35",
+        "@types/knockout.validation": "0.0.37",
+        "@types/lodash": "^4.14.168",
+        "@types/node": "14.14.35",
+        "@types/signals": "1.0.1"
+    }
+}
