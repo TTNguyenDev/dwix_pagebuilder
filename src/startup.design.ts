@@ -45,6 +45,9 @@ import { DemoDesignModule } from "./modules/demo.design.module";
         const { action, data } = event.data;
         if (action == "return_data") {
           console.log(data);
+          Object.keys(data).forEach((key) => {
+            localStorage.setItem(key, data[key]);
+          });
         }
       },
       false
@@ -52,8 +55,11 @@ import { DemoDesignModule } from "./modules/demo.design.module";
 
     const iframe = document.getElementById("iframe-sync-storage");
     // @ts-ignore
-    iframe?.contentWindow?.postMessage({
-      action: "get_data",
-    });
+    iframe?.contentWindow?.postMessage(
+      {
+        action: "get_data",
+      },
+      "*"
+    );
   });
 })();
