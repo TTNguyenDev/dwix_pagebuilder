@@ -22,8 +22,6 @@ import { DemoDesignModule } from "./modules/demo.design.module";
 
 /* Initializing dependency injection  */
 (async () => {
-  if (location.pathname === "/pagebuilder")
-    window.history.replaceState({}, "", `/${location.search}`);
   const injector = new InversifyInjector();
   injector.bindModule(new CoreDesignModule());
   injector.bindModule(new FormsDesignModule());
@@ -39,5 +37,23 @@ import { DemoDesignModule } from "./modules/demo.design.module";
   injector.resolve("autostart");
   document.addEventListener("DOMContentLoaded", () => {
     setImmediate(() => ko.applyBindings(undefined, document.body));
+
+    window.addEventListener(
+      "message",
+      (event) => {
+        console.log(event);
+        const { action, data } = event.data;
+        if (action == "return_data") {
+          console.log(data);
+        }
+      },
+      false
+    );
+
+    const iframe = document.getElementById("iframe-sync-storage");
+    // @ts-ignore
+    iframe?.contentWindow?.postMessage({
+      action: "get_data",
+    });
   });
 })();
