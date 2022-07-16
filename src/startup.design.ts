@@ -54,7 +54,7 @@ import { DemoDesignModule } from "./modules/demo.design.module";
     );
 
     const iframe = document.getElementById("iframe-sync-storage");
-    iframe.onload = () => {
+    iframe.addEventListener("load", () => {
       // @ts-ignore
       iframe?.contentWindow?.postMessage(
         {
@@ -62,6 +62,6 @@ import { DemoDesignModule } from "./modules/demo.design.module";
         },
         "*"
       );
-    };
+    });
   });
 })();
