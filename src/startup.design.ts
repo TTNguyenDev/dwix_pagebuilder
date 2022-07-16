@@ -54,12 +54,14 @@ import { DemoDesignModule } from "./modules/demo.design.module";
     );
 
     const iframe = document.getElementById("iframe-sync-storage");
-    // @ts-ignore
-    iframe?.contentWindow?.postMessage(
-      {
-        action: "get_data",
-      },
-      "*"
-    );
+    iframe.onload = () => {
+      // @ts-ignore
+      iframe?.contentWindow?.postMessage(
+        {
+          action: "get_data",
+        },
+        "*"
+      );
+    };
   });
 })();
