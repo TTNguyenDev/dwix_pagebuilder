@@ -53,8 +53,11 @@ import { DemoDesignModule } from "./modules/demo.design.module";
       false
     );
 
+    console.log("AAAAAAAAAAAAAAAAAAAAAAa");
     const iframe = document.getElementById("iframe-sync-storage");
+    console.log(iframe);
     iframe.addEventListener("load", () => {
+      console.log("LOADEDDDDDDDDDDDDDDDDDDDD");
       // @ts-ignore
       iframe?.contentWindow?.postMessage(
         {
