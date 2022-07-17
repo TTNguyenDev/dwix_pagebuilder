@@ -16,6 +16,8 @@ import { StylesDesignModule } from "@paperbits/styles/styles.design.module";
 import { ProseMirrorModule } from "@paperbits/prosemirror/prosemirror.module";
 import { OfflineModule } from "@paperbits/common/persistence/offline.module";
 import { DemoDesignModule } from "./modules/demo.design.module";
+import { BlockChainConnector } from "./utils/blockchain";
+import { LoadingEffectUtils } from "./utils/loadingEffect";
 
 /* Uncomment to enable Firebase module */
 // import { FirebaseModule } from "@paperbits/firebase/firebase.module";
@@ -36,35 +38,42 @@ import { DemoDesignModule } from "./modules/demo.design.module";
   injector.bindModule(new OfflineModule({ autosave: false }));
   injector.resolve("autostart");
   document.addEventListener("DOMContentLoaded", () => {
-    setImmediate(() => ko.applyBindings(undefined, document.body));
-
-    window.addEventListener(
-      "message",
-      (event) => {
-        console.log(event);
-        const { action, data } = event.data;
-        if (action == "return_data") {
-          console.log(data);
-          Object.keys(data).forEach((key) => {
-            localStorage.setItem(key, data[key]);
-          });
-        }
-      },
-      false
-    );
-
-    console.log("AAAAAAAAAAAAAAAAAAAAAAa");
-    const iframe = document.getElementById("iframe-sync-storage");
-    console.log(iframe);
-    iframe.addEventListener("load", () => {
-      console.log("LOADEDDDDDDDDDDDDDDDDDDDD");
-      // @ts-ignore
-      iframe?.contentWindow?.postMessage(
-        {
-          action: "get_data",
-        },
-        "*"
-      );
+    syncStorage(() => {
+      setImmediate(() => ko.applyBindings(undefined, document.body));
     });
   });
 })();
+
+function syncStorage(onSuccess: () => void) {
+  LoadingEffectUtils.show();
+  const iframe = document.getElementById("iframe-sync-storage");
+
+  iframe.addEventListener("load", () => {
+    // @ts-ignore
+    iframe?.contentWindow?.postMessage(
+      {
+        action: "get_data",
+      },
+      "*"
+    );
+  });
+
+  window.addEventListener(
+    "message",
+    (event) => {
+      console.log(event);
+      const { action, data } = event.data;
+      if (action == "return_data") {
+        iframe.remove();
+        console.log(data);
+        Object.keys(data).forEach((key) => {
+          localStorage.setItem(key, data[key]);
+        });
+        BlockChainConnector.instance.initNear();
+        LoadingEffectUtils.hide();
+        onSuccess();
+      }
+    },
+    false
+  );
+}

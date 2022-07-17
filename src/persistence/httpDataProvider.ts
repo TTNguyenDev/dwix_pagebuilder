@@ -14,7 +14,7 @@ export class HttpDataProvider {
   private initPromise: Promise<void>;
   private dataObject: Object;
 
-  constructor(private readonly httpClient: HttpClient) { }
+  constructor(private readonly httpClient: HttpClient) {}
 
   private async initialize(): Promise<void> {
     if (this.initPromise) {
@@ -22,7 +22,6 @@ export class HttpDataProvider {
     }
 
     this.initPromise = new Promise<void>(async (resolve) => {
-      await BlockChainConnector.instance.initNear();
       const params = new URLSearchParams(window.location.search);
       const id = params.get("id");
       window.localStorage.setItem("project_id", id);

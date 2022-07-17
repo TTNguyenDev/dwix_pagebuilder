@@ -18,6 +18,7 @@ import {
 } from "@paperbits/common/persistence";
 import { IPFSUtils } from "../utils/ipfsUtils";
 import { BlockChainConnector } from "../utils/blockchain";
+import { LoadingEffectUtils } from "../utils/loadingEffect";
 
 const pageSize = 20;
 
@@ -201,7 +202,7 @@ export class MemoryObjectStorage implements IObjectStorage {
 
   public async saveChanges(delta: Object): Promise<void> {
     console.log("Saving changes...");
-    document.getElementById("full-page-loading").style.display = "flex";
+    LoadingEffectUtils.show();
     const storageDataObject = await this.getDataObject();
 
     Objects.mergeDeep(storageDataObject, delta, true);
@@ -214,7 +215,7 @@ export class MemoryObjectStorage implements IObjectStorage {
       project_id: id,
       data: path,
     });
-    document.getElementById("full-page-loading").style.display = "none";
+    LoadingEffectUtils.hide();
 
     //const stateBlob = new Blob([state], { type: "text/plain;charset=utf-8" });
     //FileSaver.saveAs(stateBlob, "demo.json");
