@@ -19,13 +19,14 @@ import { StaticRoleService } from "../user/staticRoleService";
 import { SearchPublishModule } from "@paperbits/core/search/search.publish.module";
 import { ClickCounterDesignModule } from "../components/click-counter/clickCounter.design.module";
 import { FileSystemDataProvider } from "../persistence/fileSystemDataProvider";
+import { ButtonConnectWalletDesignModule } from "../components/button-connect-wallet/buttonConnectWallet.design.module";
 
 export class DemoPublishModule implements IInjectorModule {
   constructor(
     private readonly dataPath: string,
     private readonly settingsPath: string,
     private readonly outputBasePath: string
-  ) { }
+  ) {}
 
   public register(injector: IInjector): void {
     injector.bindSingleton("userService", StaticUserService);
@@ -50,6 +51,6 @@ export class DemoPublishModule implements IInjectorModule {
     );
     injector.bindModule(new SearchPublishModule());
     injector.bindModule(new ClickCounterDesignModule());
+    injector.bindModule(new ButtonConnectWalletDesignModule());
   }
 }
-

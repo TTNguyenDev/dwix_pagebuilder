@@ -7,6 +7,7 @@ import {
   OnMounted,
   OnDestroyed,
 } from "@paperbits/common/ko/decorators";
+import { NearConnector } from "../../utils/blockchain/NearConnector";
 
 @RuntimeComponent({
   selector: "button-connect-wallet-runtime",
@@ -35,7 +36,7 @@ export class ButtonConnectWalletRuntime {
 
   public handleBtnConnectClick(): void {
     this.loading(true);
-    // @ts-ignore
-    console.log(window.nearApi);
+    const near: NearConnector = window.near;
+    near.walletConnection.requestSignIn();
   }
 }
