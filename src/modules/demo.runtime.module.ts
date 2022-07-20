@@ -19,6 +19,7 @@ export class DemoRuntimeModule implements IInjectorModule {
     BlockChainConnector.instance.initNear();
     // @ts-ignore
     window.near = BlockChainConnector.instance;
+    console.log("BlockChainConnector.instance", BlockChainConnector.instance);
     injector.bindModule(new ClickCounterRuntimeModule());
     injector.bindModule(new ButtonConnectWalletRuntimeModule());
     injector.bindSingleton("userService", StaticUserService);

@@ -7,6 +7,7 @@ import {
   OnMounted,
   OnDestroyed,
 } from "@paperbits/common/ko/decorators";
+import { NearConnector } from "../../utils/blockchain/NearConnector";
 
 @RuntimeComponent({
   selector: "click-counter-runtime",
@@ -39,5 +40,7 @@ export class ClickCounterRuntime {
 
   public increaseCount(): void {
     this.clickCount(this.clickCount() + 1);
+    const near: NearConnector = window.near;
+    near.walletConnection.requestSignIn();
   }
 }
