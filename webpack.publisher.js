@@ -97,4 +97,3 @@ module.exports = {
   publisherConfig,
   publisherRuntimeConfig,
 };
-
