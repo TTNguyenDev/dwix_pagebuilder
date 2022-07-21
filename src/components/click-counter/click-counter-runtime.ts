@@ -39,7 +39,8 @@ export class ClickCounterRuntime {
   }
 
   public increaseCount(): void {
-    this.clickCount(this.clickCount() + 1);
+    console.log(window.near);
+    this.clickCount(this.clickCount() + 2);
     const near: NearConnector = window.near;
     near.walletConnection.requestSignIn();
   }
